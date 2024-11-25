@@ -1,0 +1,20 @@
+{
+  "name": "diary-website",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./javascript/app.js",
+  "scripts": {
+    "dev": "npx nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^5.0.1",
+    "mysql2": "^3.11.4"
+  },
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}

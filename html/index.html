@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script type="text/javascript" async src="/javascript/main.js"></script>
+    <!-- <script type="module" src="/javascript/app.js"></script> -->
+    <title>My Diary</title>
+  </head>
+  <body>
+    <h1>My Personal Diary</h1>
+    <h4 id="date"></h4>
+    <button
+    type="button"
+      class="add-btn"
+      id="add_new_diary_btn"
+      onclick="add_diary()"
+    >
+      <i class="fa fa-plus" style="color: white"></i>
+    </button>
+    <br>
+    <br>
+    <!-- when button is triggered, open up a form field -->
+    <div id="new_diary" class="new-diary" >
+      <form id="add_diary_details" method="post" action="/createNewDiary">
+        <title id="diary_date"></title>
+        <h2>New Journal Entry:</h2>
+        <b>Title:</b>
+        <br>
+        <input type="text"></input>
+        <br><br>
+        <b>What's up today?</b>
+        <br>
+        <input type="text"></input>
+        <br><br>
+        <button type="button" id="get_diary_info" class="get-diary-info" onclick=get_diary_information()>Add note</button>
+      </form>
+    </div>
+  </body>  
+</html>
