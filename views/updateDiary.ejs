@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Update Diary</title>
+  </head>
+  <body class="updateDiary_body">
+    <h1>Update Diary:</h1>
+    <form>
+      <label style="font-weight: bold" for="diary_title">Title:</label>
+      <br />
+      <textarea type="text" id="diary_title" name="title">
+<%= diaryContent[0].title %></textarea
+      >
+      <br />
+      <br />
+      <label style="font-weight: bold" for="diary_content"
+        >What's up today?</label
+      >
+      <br />
+      <textarea type="text" id="diary_content" name="content">
+<%= diaryContent[0].content_desc %></textarea
+      >
+      <br />
+      <button>Update diary</button>
+    </form>
+  </body>
+</html>

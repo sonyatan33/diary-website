@@ -5,10 +5,10 @@ dotenv.config();
 
 const pool = mysql
   .createPool({
-    host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE,
+    host: "127.0.0.1",
+    user: "root",
+    password: "Flower123!",
+    database: "diary_website_db",
   })
   .promise();
 
@@ -43,4 +43,27 @@ export async function createDiaryContent(title, content_desc) {
   return getDiaryContent(id);
 }
 
-// console.log( await getDiaryContents());
+export async function deleteDiaryContent(id) {
+  const result = await pool.query(
+    `
+        DELETE 
+        FROM diary_content
+        WHERE id = ?
+        `,
+    [id]
+  );
+  return;
+}
+
+export async function updateDiaryContent(id) {
+  const result = await pool.query(
+    `
+        UPDATE 
+        FROM diary_content
+        SET 
+        WHERE id = ?
+        `,
+    [id]
+  );
+  return;
+}

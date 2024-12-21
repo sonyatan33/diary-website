@@ -1,35 +1,76 @@
-import express from "express"
+import express from "express";
 import {
   getDiaryContents,
   getDiaryContent,
   createDiaryContent,
-} from "./database.js"
+  deleteDiaryContent,
+} from "./database.js";
 
 const app = express();
-app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
+app.set("view engine", "ejs");
 
+app.use(express.static("public"));
+
+//get all diary
 app.get("/diary", async (req, res) => {
   const diaryContents = await getDiaryContents();
-  res.send(diaryContents);
+  res.render("index.ejs", { diaryContents });
 });
 
+//get a single diary entry
 app.get("/diary/:id", async (req, res) => {
-  const id = req.params.id;
+  const id = +req.params.id;
   const diaryContent = await getDiaryContent(id);
-  res.send(diaryContent);
+  // res.send(diaryContent);
+  if (!diaryContent[0]) {
+    res.status(404).render("diary404.ejs");
+    return;
+  } else {
+  }
+  res.render("singleDiary.ejs", { diaryContent });
 });
 
+//create a new diary entry
 app.post("/diary", async (req, res) => {
-  const { title, content_desc } = req.body;
-  const createDiary = await createDiaryContent(title, content_desc);
-  res.status(201).send(createDiary);
+  const title = req.body.title;
+  const content = req.body.content;
+  await createDiaryContent(title, content);
+  res.redirect("/diary");
 });
 
+app.post("/diary/:id/delete", async (req, res) => {
+  const id = +req.params.id;
+  await deleteDiaryContent(id);
+  console.log(await getDiaryContents());
+  res.redirect("/diary");
+});
+
+//to update the data in another page
+app.get("/diary/:id/edit", async (req, res) => {
+  const id = +req.params.id;
+  const diaryContent = await getDiaryContent(id);
+  // res.send(diaryContent);
+  if (!diaryContent[0]) {
+    res.status(404).render("diary404.ejs");
+    return;
+  } else {
+  }
+  res.render("updateDiary.ejs", { diaryContent });
+});
+
+app.post("/diary/:id/update", async (req, res) => {
+  const id = +req.params.id;
+});
+
+//check if there is any error with our code
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
 });
 
+//passing port 5500 to server to enable us to use localhost
 app.listen(5500, () => {
   console.log("Server is running on port 5500");
 });

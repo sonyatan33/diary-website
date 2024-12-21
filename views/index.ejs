@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- <script type="text/javascript" async src="/javascript/main.js"></script> -->
+    <!-- <script type="module" src="/javascript/app.js"></script> -->
+    <title>My Diary</title>
+  </head>
+  <body class="index_body">
+    <h1>My Personal Diary</h1>
+    <h4 id="date"></h4>
+    <button
+      type="button"
+      class="add-btn"
+      id="add_new_diary_btn"
+      onclick="add_diary()"
+    >
+      <p>Add a note...</p>
+      <!-- <i class="fa fa-plus" style="color: white"></i> -->
+    </button>
+    <br />
+    <br />
+    <!-- when button is triggered, open up a form field -->
+    <div id="new_diary" class="new-diary">
+      <form id="add_diary_details" method="post" action="/diary">
+        <title id="diary_date"></title>
+        <h2>New Journal Entry:</h2>
+        <label style="font-weight: bold" for="diary_title">Title:</label>
+        <br />
+        <textarea
+          type="text"
+          style="resize: none;"
+          id="diary_title"
+          name="title"
+        ></textarea>
+        <br /><br />
+        <label style="font-weight: bold" for="diary_content"
+          >What's up today?</label
+        >
+        <br />
+        <textarea type="text" id="diary_content" name="content"></textarea>
+        <br /><br />
+        <button
+          type="submit"
+          id="get_diary_info"
+          class="get-diary-info"
+          onclick="get_diary_information()"
+        >
+          Add note
+        </button>
+      </form>
+    </div>
+    <% diaryContents.forEach(diaryContent => { %>
+    <br />
+    <div class="diary_contents_card">
+      <div class="diary_card_container">
+        <a href="/diary/<%= diaryContent.id %>" class="diary_title_link">
+          <b style="font-size: 20px"><%= diaryContent.title %></b>
+        </a>
+        <br />
+        <% var get_weekday = { weekday: "long", }; var options = { year:
+        "numeric", month: "short", day: "2-digit", }; %>
+        <p><%= diaryContent.content_desc %></p>
+        <p style="text-align: right; font-weight: bold">
+          <%= diaryContent.created.toLocaleDateString( "en-GB", get_weekday
+          ).concat(", ", diaryContent.created.toLocaleDateString( "en-GB",
+          options )) %>
+        </p>
+      </div>
+    </div>
+    <% }) %>
+  </body>
+  <script type="text/javascript">
+    var options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+    };
+
+    //today's date
+    document.getElementById("date").innerHTML = new Date().toDateString();
+
+    //when user creates a new diary, open the form
+    function add_diary() {
+      var new_diary = document.getElementsByClassName("new-diary")[0];
+      if ((new_diary.style.display = "none")) {
+        new_diary.style.display = "block";
+      }
+    }
+  </script>
+</html>

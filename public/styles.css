@@ -1,0 +1,64 @@
+/* index.ejs file style */
+.index_body {
+  text-align: center;
+  background-color: #f5efd7;
+}
+
+.add-btn {
+  padding: 0;
+  border: none;
+  background: none;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.new-diary {
+  display: none;
+  position: relative;
+  border-radius: 5px;
+  border: 1px solid black;
+  text-align: start;
+  margin: auto;
+  width: 50%;
+  height: 50%;
+  padding: 50px;
+  background-color: cornsilk;
+  opacity: 80%;
+}
+
+.get-diary-info {
+  float: right;
+  background-color: aliceblue;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.diary_contents_card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  width: 70%;
+  margin: auto;
+  background-color: rgb(243, 243, 243);
+}
+
+.diary_card_container {
+  padding: 20px;
+  text-align: start;
+}
+
+.diary_title_link {
+  text-decoration: none;
+  color: black;
+}
+
+/* singleDiary.ejs file style */
+
+.singleDiary_body {
+  background-color: #f5efd7;
+}
+
+/* updateDiary.ejs file style */
+.updateDiary_body {
+  background-color: #f5efd7;
+}
