@@ -44,7 +44,7 @@ export async function createDiaryContent(title, content_desc) {
 }
 
 export async function deleteDiaryContent(id) {
-  const result = await pool.query(
+  await pool.query(
     `
         DELETE 
         FROM diary_content
@@ -55,15 +55,16 @@ export async function deleteDiaryContent(id) {
   return;
 }
 
-export async function updateDiaryContent(id) {
-  const result = await pool.query(
+export async function updateDiaryContent(id, title, content_desc) {
+  await pool.query(
     `
-        UPDATE 
-        FROM diary_content
-        SET 
-        WHERE id = ?
+        UPDATE diary_content
+        SET
+        ?,
+        ?
+        WHERE id = ${id}
         `,
-    [id]
+    [{ title: title }, { content_desc: content_desc }]
   );
   return;
 }

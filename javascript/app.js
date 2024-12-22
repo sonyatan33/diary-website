@@ -4,6 +4,7 @@ import {
   getDiaryContent,
   createDiaryContent,
   deleteDiaryContent,
+  updateDiaryContent,
 } from "./database.js";
 
 const app = express();
@@ -47,7 +48,7 @@ app.post("/diary/:id/delete", async (req, res) => {
   res.redirect("/diary");
 });
 
-//to update the data in another page
+//to create update fields for the data in another page
 app.get("/diary/:id/edit", async (req, res) => {
   const id = +req.params.id;
   const diaryContent = await getDiaryContent(id);
@@ -60,8 +61,13 @@ app.get("/diary/:id/edit", async (req, res) => {
   res.render("updateDiary.ejs", { diaryContent });
 });
 
+//update data using a post req (put req wont work...)
 app.post("/diary/:id/update", async (req, res) => {
   const id = +req.params.id;
+  const title = req.body.title;
+  const content = req.body.content;
+  await updateDiaryContent(id, title, content);
+  res.redirect("/diary/" + id);
 });
 
 //check if there is any error with our code
