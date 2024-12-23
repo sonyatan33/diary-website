@@ -9,15 +9,19 @@
     <title>My Diary</title>
   </head>
   <body class="index_body">
-    <h1>My Personal Diary</h1>
-    <h4 id="date"></h4>
+    <h1 style="font-family: 'Courier New', Courier, monospace">
+      My Personal Diary
+    </h1>
+    <h4 id="date" style="font-family: 'Courier New', Courier, monospace"></h4>
     <button
       type="button"
       class="add-btn"
       id="add_new_diary_btn"
       onclick="add_diary()"
     >
-      <p>Add a note...</p>
+      <p style="font-family: 'Courier New', Courier, monospace">
+        Add a note...
+      </p>
       <!-- <i class="fa fa-plus" style="color: white"></i> -->
     </button>
     <br />
@@ -26,27 +30,48 @@
     <div id="new_diary" class="new-diary">
       <form id="add_diary_details" method="post" action="/diary">
         <title id="diary_date"></title>
-        <h2>New Journal Entry:</h2>
-        <label style="font-weight: bold" for="diary_title">Title:</label>
+        <h2 style="font-family: 'Courier New', Courier, monospace">
+          New Journal Entry:
+        </h2>
+        <label
+          style="
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+          "
+          for="diary_title"
+          >Title:</label
+        >
         <br />
         <textarea
           type="text"
-          style="resize: none;"
+          style="resize: none"
           id="diary_title"
           name="title"
         ></textarea>
         <br /><br />
-        <label style="font-weight: bold" for="diary_content"
+        <label
+          style="
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+          "
+          >Add an image here:</label
+        >
+        <br />
+        <button>Attach image</button>
+        <br />
+        <br />
+        <label
+          style="
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+          "
+          for="diary_content"
           >What's up today?</label
         >
         <br />
         <textarea type="text" id="diary_content" name="content"></textarea>
         <br /><br />
-        <button
-          type="submit"
-          id="get_diary_info"
-          class="get-diary-info"
-        >
+        <button type="submit" id="get_diary_info" class="get-diary-info">
           Add note
         </button>
       </form>
@@ -56,13 +81,27 @@
     <div class="diary_contents_card">
       <div class="diary_card_container">
         <a href="/diary/<%= diaryContent.id %>" class="diary_title_link">
-          <b style="font-size: 20px"><%= diaryContent.title %></b>
+          <b
+            style="
+              font-size: 20px;
+              font-family: 'Courier New', Courier, monospace;
+            "
+            ><%= diaryContent.title %></b
+          >
         </a>
         <br />
         <% var get_weekday = { weekday: "long", }; var options = { year:
         "numeric", month: "short", day: "2-digit", }; %>
-        <p><%= diaryContent.content_desc %></p>
-        <p style="text-align: right; font-weight: bold">
+        <p style="font-family: 'Courier New', Courier, monospace">
+          <%= diaryContent.content_desc %>
+        </p>
+        <p
+          style="
+            text-align: right;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+          "
+        >
           <%= diaryContent.created.toLocaleDateString( "en-GB", get_weekday
           ).concat(", ", diaryContent.created.toLocaleDateString( "en-GB",
           options )) %>

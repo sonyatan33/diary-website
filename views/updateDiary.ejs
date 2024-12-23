@@ -8,15 +8,41 @@
   </head>
   <body class="updateDiary_body">
     <h1>Update Diary:</h1>
-    <form method="post" action="/diary/<%= diaryContent[0].id %>/update">
-      <label style="font-weight: bold" for="diary_title">Title:</label>
+    <form
+      method="post"
+      action="/diary/<%= diaryContent[0].id %>/update?_method=PUT"
+    >
+      <label
+        style="
+          font-weight: bold;
+          font-family: 'Courier New', Courier, monospace;
+        "
+        for="diary_title"
+        >Title:</label
+      >
       <br />
       <textarea type="text" id="diary_title" name="title">
 <%= diaryContent[0].title %></textarea
       >
       <br />
       <br />
-      <label style="font-weight: bold" for="diary_content"
+      <label
+        style="
+          font-weight: bold;
+          font-family: 'Courier New', Courier, monospace;
+        "
+        >Add an image here:</label
+      >
+      <br />
+      <button>Attcah image</button>
+      <br />
+      <br />
+      <label
+        style="
+          font-weight: bold;
+          font-family: 'Courier New', Courier, monospace;
+        "
+        for="diary_content"
         >What's up today?</label
       >
       <br />

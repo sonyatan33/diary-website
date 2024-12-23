@@ -7,8 +7,11 @@ import {
   updateDiaryContent,
 } from "./database.js";
 
+import methodOverride from "method-override";
+
 const app = express();
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 // app.use(express.json());
 app.set("view engine", "ejs");
 
@@ -62,7 +65,7 @@ app.get("/diary/:id/edit", async (req, res) => {
 });
 
 //update data using a post req (put req wont work...)
-app.post("/diary/:id/update", async (req, res) => {
+app.put("/diary/:id/update", async (req, res) => {
   const id = +req.params.id;
   const title = req.body.title;
   const content = req.body.content;
