@@ -57,6 +57,9 @@
 .singleDiary_body {
   background-color: #f5efd7;
 }
+.single_image {
+  width: 300px;
+}
 
 /* updateDiary.ejs file style */
 .updateDiary_body {

@@ -10,6 +10,11 @@
     <h1 style="font-family: 'Courier New', Courier, monospace">
       <%= diaryContent[0].title %>
     </h1>
+    <% if (image) { %> <% image = image.toString("base64"); %>
+    <br />
+    <img src="data:image/jpg;base64,<%= image %>" class="single_image" />
+    <% } else { %> <% } %>
+    <br />
     <p style="font-family: 'Courier New', Courier, monospace">
       <%= diaryContent[0].content_desc %>
     </p>

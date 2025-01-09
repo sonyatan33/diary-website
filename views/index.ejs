@@ -28,7 +28,7 @@
     <br />
     <!-- when button is triggered, open up a form field -->
     <div id="new_diary" class="new-diary">
-      <form id="add_diary_details" method="post" action="/diary">
+      <form id="add_diary_details" method="post" action="/diary" enctype="multipart/form-data">
         <title id="diary_date"></title>
         <h2 style="font-family: 'Courier New', Courier, monospace">
           New Journal Entry:
@@ -54,10 +54,11 @@
             font-weight: bold;
             font-family: 'Courier New', Courier, monospace;
           "
+          for="diary_image"
           >Add an image here:</label
         >
         <br />
-        <button>Attach image</button>
+        <input name="image" id="diary_image" type="file" accept="image/jpeg, image/png, image/jpg"></input>
         <br />
         <br />
         <label
@@ -78,46 +79,41 @@
     </div>
     <% diaryContents.forEach(diaryContent => { %>
     <br />
-    <div class="diary_contents_card">
-      <div class="diary_card_container">
-        <a href="/diary/<%= diaryContent.id %>" class="diary_title_link">
-          <b
+    <main>
+      <div class="diary_contents_card">
+        <div class="diary_card_container">
+          <a href="/diary/<%= diaryContent.id %>" class="diary_title_link">
+            <b
+              style="
+                font-size: 20px;
+                font-family: 'Courier New', Courier, monospace;
+              "
+              ><%= diaryContent.title %></b
+            >
+          </a>
+          <br />
+          <p style="font-family: 'Courier New', Courier, monospace">
+            <%= diaryContent.content_desc %>
+          </p>
+          <p
             style="
-              font-size: 20px;
+              text-align: right;
+              font-weight: bold;
               font-family: 'Courier New', Courier, monospace;
             "
-            ><%= diaryContent.title %></b
           >
-        </a>
-        <br />
-        <% var get_weekday = { weekday: "long", }; var options = { year:
-        "numeric", month: "short", day: "2-digit", }; %>
-        <p style="font-family: 'Courier New', Courier, monospace">
-          <%= diaryContent.content_desc %>
-        </p>
-        <p
-          style="
-            text-align: right;
-            font-weight: bold;
-            font-family: 'Courier New', Courier, monospace;
-          "
-        >
-          <%= diaryContent.created.toLocaleDateString( "en-GB", get_weekday
-          ).concat(", ", diaryContent.created.toLocaleDateString( "en-GB",
-          options )) %>
-        </p>
+          <% var get_weekday = { weekday: "long", }; var options = { year:
+          "numeric", month: "short", day: "2-digit", }; %>
+            <%= diaryContent.created.toLocaleDateString( "en-GB", get_weekday
+            ).concat(", ", diaryContent.created.toLocaleDateString( "en-GB",
+            options )) %>
+          </p>
+        </div>
       </div>
-    </div>
-    <% }) %>
+      <% }) %>
+    </main>
   </body>
   <script type="text/javascript">
-    var options = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      weekday: "long",
-    };
-
     //today's date
     document.getElementById("date").innerHTML = new Date().toDateString();
 
@@ -127,6 +123,6 @@
       if ((new_diary.style.display = "none")) {
         new_diary.style.display = "block";
       }
-    }
+    } 
   </script>
 </html>
