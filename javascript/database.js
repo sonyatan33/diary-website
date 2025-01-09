@@ -31,13 +31,13 @@ export async function getDiaryContent(id) {
   return row;
 }
 
-export async function createDiaryContent(title, content_desc) {
+export async function createDiaryContent(title, content_desc, blob_img) {
   const [result] = await pool.query(
     `
-        INSERT INTO diary_content(title, content_desc)
-        VALUES(?,?)
+        INSERT INTO diary_content(title, content_desc, blob_img)
+        VALUES(?,?, ?)
         `,
-    [title, content_desc]
+    [title, content_desc, blob_img]
   );
   const id = result.insertId;
   return getDiaryContent(id);
@@ -55,16 +55,17 @@ export async function deleteDiaryContent(id) {
   return;
 }
 
-export async function updateDiaryContent(id, title, content_desc) {
+export async function updateDiaryContent(id, title, content_desc, blob_img) {
   await pool.query(
     `
         UPDATE diary_content
         SET
         ?,
+        ?,
         ?
         WHERE id = ${id}
         `,
-    [{ title: title }, { content_desc: content_desc }]
+    [{ title: title }, { content_desc: content_desc }, {blob_img: blob_img}]
   );
   return;
 }

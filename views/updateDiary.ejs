@@ -11,6 +11,7 @@
     <form
       method="post"
       action="/diary/<%= diaryContent[0].id %>/update?_method=PUT"
+      enctype="multipart/form-data"
     >
       <label
         style="
@@ -27,15 +28,16 @@
       <br />
       <br />
       <label
-        style="
-          font-weight: bold;
-          font-family: 'Courier New', Courier, monospace;
-        "
-        >Add an image here:</label
-      >
-      <br />
-      <button>Attcah image</button>
-      <br />
+          style="
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+          "
+          for="diary_image"
+          >Add an image here:</label
+        >
+        <br />
+        <input name="image" id="diary_image" type="file" accept="image/jpeg, image/png, image/jpg"></input>
+        <br />
       <br />
       <label
         style="
