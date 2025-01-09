@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter"
+      rel="stylesheet"
+    />
+
+    <title>Personal Blog</title>
+  </head>
+  <body class="index_body">
+    <br />
+    <h1 style="font-family: 'Inter'">Personal Blog</h1>
+    <br />
+    <div
+      style="
+        display: flex;
+        justify-content: space-evenly;
+        padding-left: 40%;
+        padding-right: 40%;
+        font-family: 'Inter';
+      "
+    >
+      <h3>About</h3>
+      <h3 style="text-decoration: underline">Blog</h3>
+    </div>
+    <br />
+    <br />
+    <div class="grid-container">
+      <% diaryContents.forEach(diaryContent => { %>
+      <div class="grid-container-card">
+        <a href="/diary/<%= diaryContent.id %>" class="diary_title_link"
+          ><b style="font-size: 20px; font-family: 'Inter'"
+            ><%= diaryContent.title %></b
+          >
+        </a>
+        <br />
+        <p style="font-family: 'Inter'"><%= diaryContent.content_desc %></p>
+      </div>
+
+      <% }) %>
+    </div>
+    <br />
+    <br />
+    <button
+      type="button"
+      class="add-btn"
+      id="add_new_diary_btn"
+      onclick="add_diary()"
+    >
+      <p style="font-family: 'Inter'">Add a note...</p>
+      <!-- <i class="fa fa-plus" style="color: white"></i> -->
+    </button>
+  </body>
+</html>
