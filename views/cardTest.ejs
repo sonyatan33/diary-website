@@ -27,19 +27,32 @@
     </div>
     <br />
     <br />
-    <div class="grid-container">
-      <% diaryContents.forEach(diaryContent => { %>
-      <div class="grid-container-card">
-        <a href="/diary/<%= diaryContent.id %>" class="diary_title_link"
-          ><b style="font-size: 20px; font-family: 'Inter'"
-            ><%= diaryContent.title %></b
-          >
-        </a>
-        <br />
-        <p style="font-family: 'Inter'"><%= diaryContent.content_desc %></p>
-      </div>
+    <div style="padding-left: 250px; padding-right: 250px">
+      <div class="grid-container">
+        <% diaryContents.forEach(diaryContent => { %>
+        <div class="grid-container-card">
+          <% if (diaryContent.blob_img) { %> <% image =
+          diaryContent.blob_img.toString("base64"); %>
+          <img
+            src="data:image/jpg;base64,<%= image %>"
+            class="blog_card_image"
+          />
+          <% } else { %>
+          <img src="images/missing_img.jpg" class="blog_card_image" />
+          <% } %>
+          <br />
+          <br />
+          <a href="/diary/<%= diaryContent.id %>" class="diary_title_link"
+            ><b style="font-size: 20px; font-family: 'Inter'"
+              ><%= diaryContent.title %></b
+            >
+          </a>
+          <br />
+          <p style="font-family: 'Inter'"><%= diaryContent.content_desc %></p>
+        </div>
 
-      <% }) %>
+        <% }) %>
+      </div>
     </div>
     <br />
     <br />

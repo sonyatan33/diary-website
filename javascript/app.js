@@ -28,6 +28,12 @@ app.get("/diary", async (req, res) => {
   res.render("index.ejs", { diaryContents });
 });
 
+//get all blogs (redesign)
+app.get("/blog", async (req, res) => {
+  const diaryContents = await getDiaryContents();
+  res.render("cardTest.ejs", { diaryContents });
+});
+
 //get a single diary entry
 app.get("/diary/:id", async (req, res) => {
   const id = +req.params.id;
@@ -58,7 +64,6 @@ app.post("/diary", async (req, res) => {
 app.post("/diary/:id/delete", async (req, res) => {
   const id = +req.params.id;
   await deleteDiaryContent(id);
-  // console.log(await getDiaryContents());
   res.redirect("/diary");
 });
 
