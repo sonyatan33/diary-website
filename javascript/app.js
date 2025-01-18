@@ -34,6 +34,20 @@ app.get("/blog", async (req, res) => {
   res.render("cardTest.ejs", { diaryContents });
 });
 
+app.get("/about_blog", async (req, res) => {
+  res.render("aboutBlog.ejs");
+});
+
+//create new blog page (redesign)
+app.get("/new_blog", (req, res) => {
+  res.render("createBlog.ejs");
+});
+
+
+app.get("/new_blog", (req, res) => {
+  res.render("createBlog.ejs");
+});
+
 //get a single diary entry
 app.get("/diary/:id", async (req, res) => {
   const id = +req.params.id;
@@ -51,20 +65,20 @@ app.get("/diary/:id", async (req, res) => {
 });
 
 //create a new diary entry
-app.post("/diary", async (req, res) => {
+app.post("/blog", async (req, res) => {
   const title = req.body.title;
   const content = req.body.content;
   const imageBuffer = req.files.image.data;
   // const image = req.files.image;
   // res.send(imageBuffer);
   await createDiaryContent(title, content, imageBuffer);
-  res.redirect("/diary");
+  res.redirect("/blog");
 });
 
 app.post("/diary/:id/delete", async (req, res) => {
   const id = +req.params.id;
   await deleteDiaryContent(id);
-  res.redirect("/diary");
+  res.redirect("/blog");
 });
 
 //to create update fields for the data in another page

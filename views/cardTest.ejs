@@ -9,61 +9,39 @@
 
     <title>Personal Blog</title>
   </head>
-  <body class="index_body">
-    <br />
-    <h1 style="font-family: 'Inter'">Personal Blog</h1>
-    <br />
-    <div
-      style="
-        display: flex;
-        justify-content: space-evenly;
-        padding-left: 40%;
-        padding-right: 40%;
-        font-family: 'Inter';
-      "
-    >
-      <h3>About</h3>
-      <h3 style="text-decoration: underline">Blog</h3>
+  <body class="cardTest_body">
+    <h1>Personal Blog</h1>
+    <div class="navbar_main">
+      <a href="/about_blog">About</a>
+      <a class="active">Blog</a>
     </div>
-    <br />
-    <br />
-    <div style="padding-left: 250px; padding-right: 250px">
-      <div class="grid-container">
-        <% diaryContents.forEach(diaryContent => { %>
-        <div class="grid-container-card">
-          <% if (diaryContent.blob_img) { %> <% image =
-          diaryContent.blob_img.toString("base64"); %>
-          <img
-            src="data:image/jpg;base64,<%= image %>"
-            class="blog_card_image"
-          />
-          <% } else { %>
-          <img src="images/missing_img.jpg" class="blog_card_image" />
-          <% } %>
-          <br />
-          <br />
-          <a href="/diary/<%= diaryContent.id %>" class="diary_title_link"
-            ><b style="font-size: 20px; font-family: 'Inter'"
-              ><%= diaryContent.title %></b
-            >
-          </a>
-          <br />
-          <p style="font-family: 'Inter'"><%= diaryContent.content_desc %></p>
-        </div>
-
-        <% }) %>
+    <div class="grid-container">
+      <% diaryContents.forEach(diaryContent => { %>
+      <div class="grid-container-card">
+        <% if (diaryContent.blob_img) { %> <% image =
+        diaryContent.blob_img.toString("base64"); %>
+        <img src="data:image/jpg;base64,<%= image %>" class="blog_card_image" />
+        <% } else { %>
+        <img src="images/missing_img.jpg" class="blog_card_image" />
+        <% } %>
+        <a href="/diary/<%= diaryContent.id %>" class="links_decoration"
+          ><b style="font-size: 20px; font-family: 'Inter'"
+            ><%= diaryContent.title %></b
+          >
+        </a>
+        <p style="font-family: 'Inter'"><%= diaryContent.content_desc %></p>
       </div>
+      <% }) %>
     </div>
     <br />
     <br />
-    <button
-      type="button"
-      class="add-btn"
-      id="add_new_diary_btn"
-      onclick="add_diary()"
-    >
-      <p style="font-family: 'Inter'">Add a note...</p>
-      <!-- <i class="fa fa-plus" style="color: white"></i> -->
-    </button>
+    <a href="/new_blog">
+      <p
+        style="font-family: 'Inter'; font-size: 25px; padding-bottom: 10%"
+        class="links_decoration"
+      >
+        Add a new blog today!
+      </p>
+    </a>
   </body>
 </html>
