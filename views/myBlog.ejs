@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter"
+      rel="stylesheet"
+    />
+
+    <title>Personal Blog</title>
+  </head>
+  <body class="myBlog_body">
+    <h1>Personal Blog</h1>
+    <div class="navbar_main">
+      <a href="/about_blog">About</a>
+      <a href="/blog">Today's Feed</a>
+      <a class="active">My Blog</a>
+    </div>
+    <div class="grid-container">
+      <% diaryContents.forEach(diaryContent => { %>
+      <div class="grid-container-card">
+        <% if (diaryContent.blob_img) { %> <% image =
+        diaryContent.blob_img.toString("base64"); %>
+        <img src="data:image/jpg;base64,<%= image %>" class="blog_card_image" />
+        <% } else { %>
+        <img src="/images/missing_img.jpg" class="blog_card_image" />
+        <% } %>
+        <a
+          href="/my_blog/<%= diaryContent.id %>/edit"
+          style="text-decoration: none; color: black"
+          ><b
+            style="
+              font-size: 20px;
+              font-family: 'Inter';
+              color: white;
+            "
+            ><%= diaryContent.title %></b
+          >
+        </a>
+        <div class="edit_delete_btn">
+          <button>
+            <a class="edit_link" href="/my_blog/<%= diaryContent.id %>/edit"
+              >Edit</a
+            >
+          </button>
+          <form
+            action="/my_blog/<%= diaryContent.id %>/delete"
+            method="post"
+            style="cursor: pointer"
+          >
+            <button type="submit" class="delete_link">Delete</button>
+          </form>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </body>
+</html>

@@ -9,11 +9,12 @@
 
     <title>Personal Blog</title>
   </head>
-  <body class="cardTest_body">
+  <body class="mainBlog_body">
     <h1>Personal Blog</h1>
     <div class="navbar_main">
       <a href="/about_blog">About</a>
-      <a class="active">Blog</a>
+      <a class="active">Today's Feed</a>
+      <a href="/my_blog">My Blog</a>
     </div>
     <div class="grid-container">
       <% diaryContents.forEach(diaryContent => { %>
@@ -22,24 +23,23 @@
         diaryContent.blob_img.toString("base64"); %>
         <img src="data:image/jpg;base64,<%= image %>" class="blog_card_image" />
         <% } else { %>
-        <img src="images/missing_img.jpg" class="blog_card_image" />
+        <img src="/images/missing_img.jpg" class="blog_card_image" />
         <% } %>
-        <a href="/diary/<%= diaryContent.id %>" class="links_decoration"
-          ><b style="font-size: 20px; font-family: 'Inter'"
+        <a
+          href="/blog/<%= diaryContent.id %>"
+          style="text-decoration: none; color: black"
+          ><b style="font-size: 20px; font-family: 'Inter'; color: white"
             ><%= diaryContent.title %></b
           >
         </a>
-        <p style="font-family: 'Inter'"><%= diaryContent.content_desc %></p>
+        <p style="font-family: 'Inter'; color: rgb(223 161 161)">
+          <%= diaryContent.content_desc %>
+        </p>
       </div>
       <% }) %>
     </div>
-    <br />
-    <br />
-    <a href="/new_blog">
-      <p
-        style="font-family: 'Inter'; font-size: 25px; padding-bottom: 10%"
-        class="links_decoration"
-      >
+    <a href="/new_blog" class="links_decoration">
+      <p style="font-family: 'Inter'; font-size: 25px; padding-bottom: 10%">
         Add a new blog today!
       </p>
     </a>

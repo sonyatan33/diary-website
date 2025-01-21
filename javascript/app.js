@@ -14,57 +14,34 @@ import bodyParser from "body-parser";
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-// app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(fileUpload());
 app.set("view engine", "ejs");
-
 app.use(express.static("public"));
 
-//get all diary
-app.get("/diary", async (req, res) => {
-  const diaryContents = await getDiaryContents();
-  res.render("index.ejs", { diaryContents });
-});
-
-//get all blogs (redesign)
-app.get("/blog", async (req, res) => {
-  const diaryContents = await getDiaryContents();
-  res.render("cardTest.ejs", { diaryContents });
-});
-
+//more about what blog website is about
 app.get("/about_blog", async (req, res) => {
   res.render("aboutBlog.ejs");
 });
 
-//create new blog page (redesign)
+//get all blogs
+app.get("/blog", async (req, res) => {
+  const diaryContents = await getDiaryContents();
+  res.render("mainBlog.ejs", { diaryContents });
+});
+//get personal blog
+app.get("/my_blog", async (req, res) => {
+  const diaryContents = await getDiaryContents();
+  res.render("myBlog.ejs", { diaryContents });
+});
+
+//create new blog page
 app.get("/new_blog", (req, res) => {
   res.render("createBlog.ejs");
 });
 
-
-app.get("/new_blog", (req, res) => {
-  res.render("createBlog.ejs");
-});
-
-//get a single diary entry
-app.get("/diary/:id", async (req, res) => {
-  const id = +req.params.id;
-  const diaryContent = await getDiaryContent(id);
-  const imageBuffer = diaryContent[0].blob_img;
-  // const image = imageBuffer.toString("base64");
-
-  if (!diaryContent[0]) {
-    res.status(404).render("diary404.ejs");
-    return;
-  } else {
-  }
-  // res.send(image);
-  res.render("singleDiary.ejs", { diaryContent, image: imageBuffer });
-});
-
-//create a new diary entry
+//create a new blog entry
 app.post("/blog", async (req, res) => {
   const title = req.body.title;
   const content = req.body.content;
@@ -75,34 +52,49 @@ app.post("/blog", async (req, res) => {
   res.redirect("/blog");
 });
 
-app.post("/diary/:id/delete", async (req, res) => {
-  const id = +req.params.id;
-  await deleteDiaryContent(id);
-  res.redirect("/blog");
-});
-
-//to create update fields for the data in another page
-app.get("/diary/:id/edit", async (req, res) => {
+//get a single blog entry
+app.get("/blog/:id", async (req, res) => {
   const id = +req.params.id;
   const diaryContent = await getDiaryContent(id);
-  // res.send(diaryContent);
+  const imageBuffer = diaryContent[0].blob_img;
+  // const image = imageBuffer.toString("base64");
+
   if (!diaryContent[0]) {
-    res.status(404).render("diary404.ejs");
+    res.status(404).render("blog404.ejs");
     return;
   } else {
   }
-  res.render("updateDiary.ejs", { diaryContent });
+  res.render("singleBlog.ejs", { diaryContent, image: imageBuffer });
 });
 
-//update data using a post req (put req wont work...)
-app.put("/diary/:id/update", async (req, res) => {
+//edit blog page
+app.get("/my_blog/:id/edit", async (req, res) => {
+  const id = +req.params.id;
+  const diaryContent = await getDiaryContent(id);
+  if (!diaryContent[0]) {
+    res.status(404).render("blog404.ejs");
+    return;
+  } else {
+  }
+  res.render("updateBlog.ejs", { diaryContent });
+});
+
+//update data using a put req
+app.put("/blog/:id/update", async (req, res) => {
   const id = +req.params.id;
   const title = req.body.title;
   const content = req.body.content;
   const imageBuffer = req.files.image.data;
 
   await updateDiaryContent(id, title, content, imageBuffer);
-  res.redirect("/diary/" + id);
+  res.redirect("/blog/" + id);
+});
+
+//delete a blog entry
+app.post("/my_blog/:id/delete", async (req, res) => {
+  const id = +req.params.id;
+  await deleteDiaryContent(id);
+  res.redirect("/my_blog");
 });
 
 //check if there is any error with our code
