@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter"
+      rel="stylesheet"
+    />  
+    <title>Edit Blog</title>
+  </head>
+  <body class="updateBlog_body">
+    <div class="updateBlog_details">
+        <h1>Personal Blog</h1>
+        <div class="updateBlog_navbar">
+            <a href="/my_blog">Blog</a>
+            <i
+                class="fa fa-chevron-right fa-2xs"
+                style="font-size: 10px; margin-top: 10px"
+            ></i>
+            <a><%= diaryContent[0].title %></a>
+        </div>
+    </div>
+    <div class="updateBlog_layout">
+    <form
+      method="post"
+      action="/blog/<%= diaryContent[0].id %>/update?_method=PUT"
+      enctype="multipart/form-data"
+      class="update_blog_form"
+    >
+      <label
+        style="
+          display: none;
+        "
+        for="diary_title"
+        ></label
+      >
+      <input type="text" id="diary_title" name="title" value="<%= diaryContent[0].title %>">
+</input
+      >
+      <label
+        style="
+          display: none;
+        "
+        for="diary_content"
+        ></label
+      >
+      <textarea type="text" id="diary_content" name="content" rows="15">
+<%= diaryContent[0].content_desc %></textarea
+      >
+      <label
+          for="diary_image"
+          class="attach_img"
+          >Add an image</label
+        >
+        <input name="image" id="diary_image" type="file" accept="image/jpeg, image/png, image/jpg"></input>
+        <div class="submit_btn">
+      <button type="submit" onclick="currentDiaryValues()" id="updateBtn" class="update_btn">
+        Update
+      </button>
+      </div>
+    </form>
+    </div>
+  </body>
+  <script type="text/javascript">
+    //used to get the current values of what user updates
+    var title = document.getElementById("diary_title");
+    var contents = document.getElementById("diary_title");
+
+    //empty string which will contain updated information to pass into the title and contents field
+    var currentTitle = "";
+    var currentContents = "";
+
+    // function for when user clicks on the button to trigger a onclick event,
+    // where fields get updated to the current data
+    function currentDiaryValues() {
+      //get current title input and change the value uploaded to the server to the current content
+      currentTitle = title.value;
+      title.innerHTML = currentTitle;
+
+      //get current content input and change the value uploaded to the server to the current content
+      currentContents = contents.value;
+      contents.innerHTML = currentContents;
+    }
+  </script>
+</html>
