@@ -1,3 +1,7 @@
+/* *{
+  margin: 0;
+} */
+
 /* mainBlog.ejs file style */
 .mainBlog_body {
   width: 100%;
@@ -188,7 +192,7 @@
 .updateBlog_body {
   display: flex;
   flex-direction: column;
-  padding: 2%;
+  padding: 2.5% 5%;
   justify-content: space-between;
   font-family: "Inter";
 }
@@ -215,6 +219,7 @@
   margin: auto;
   background-color: rgba(234, 234, 234, 1);
   width: 100%;
+  border-radius: 6px;
 }
 
 .update_blog_form {
@@ -226,8 +231,8 @@
 }
 
 .update_btn {
-  border: 1px solid black;
-  border-radius: 40px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
   background-color: rgba(185, 242, 149, 1);
   padding: 10px;
   font-size: large;
@@ -285,6 +290,8 @@
 }
 
 .attach_img {
+  display: none;
+  gap: 5px;
   border-radius: 8px;
   border: 0.5px solid #ccc;
   font-family: "Inter";
@@ -297,7 +304,7 @@
 }
 
 #diary_image {
-  display: none;
+  /* display: none; */
 }
 
 .submit_btn {

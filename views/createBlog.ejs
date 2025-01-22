@@ -44,9 +44,12 @@
             <label
                 for="diary_image"
                 class="attach_img"
-                >Add an image</label
+                >
+                <!-- Add an image 
+                <img style="height: 20px;" src="/images/attach_img.png"> -->
+                </label
             >
-            <input name="image" id="diary_image" type="file" accept="image/jpeg, image/png, image/jpg"></input>
+            <input name="image" id="diary_image" type="file" accept="image/jpeg, image/png, image/jpg" placeholder="Add an image"></input>
             <div class="submit_btn">
             <button type="submit" id="get_diary_info" class="create_btn">
                 Create
@@ -55,4 +58,22 @@
         </form>
     </div>
 </body>
+<script type="text/javascript">
+    // var attached_image = document.getElementById("attached_img_name");
+    // var current_attached_image = "";
+    // function current_attached_img() {
+    //     current_attached_image = attached_image.value
+    //     attached_image.innerHTML = current_attached_image
+    // }
+    function readURL(input){
+        if (input.files && input.files[0]) {
+            $(".attach_img").css("color", "green");
+        }else{
+          $(".attach_img").css("color", "black");
+        }
+    }
+    $("#diary_image").change(function () {
+        readURL(this);
+    });
+</script>
 </html>
