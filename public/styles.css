@@ -290,7 +290,8 @@
 }
 
 .attach_img {
-  display: none;
+  /* display: none; */
+  display: flex;
   gap: 5px;
   border-radius: 8px;
   border: 0.5px solid #ccc;
@@ -304,7 +305,8 @@
 }
 
 #diary_image {
-  /* display: none; */
+  
+  display: none;
 }
 
 .submit_btn {
