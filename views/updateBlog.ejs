@@ -15,66 +15,70 @@
     <title>Edit Blog</title>
   </head>
   <body class="updateBlog_body">
-    <div class="updateBlog_details">
-        <h1>Personal Blog</h1>
-        <div class="updateBlog_navbar">
-            <a href="/my_blog">My Blog</a>
-            <i
-                class="fa fa-chevron-right fa-2xs"
-                style="font-size: 10px; margin-top: 10px"
-            ></i>
-            <a>Edit Blog</a>
-        </div>
-    </div>
-    <div class="updateBlog_layout">
-    <form
-      method="post"
-      action="/blog/<%= diaryContent[0].id %>/update?_method=PUT"
-      enctype="multipart/form-data"
-      class="update_blog_form"
-    >
-      <label
-        style="
-          display: none;
-        "
-        for="diary_title"
-        ></label
-      >
-      <input type="text" id="diary_title" name="title" value="<%= diaryContent[0].title %>">
-</input
-      >
-      <label
-        style="
-          display: none;
-        "
-        for="diary_content"
-        ></label
-      >
-      <textarea type="text" id="diary_content" name="content" rows="15">
-<%= diaryContent[0].content_desc %></textarea
-      >
-      <label
-          for="diary_image"
-          class="attach_img"
-          >Add an image</label
-        >
-        <input name="image" id="diary_image" type="file" accept="image/jpeg, image/png, image/jpg"></input>
-        <div class="submit_btn">
-      <button type="submit" onclick="currentDiaryValues()" id="updateBtn" class="update_btn">
-        Update
-      </button>
+    <h1>Personal Blog</h1>
+    <div class="updateBlog_contents">
+      <div class="updateBlog_navbar">
+        <a href="/my_blog">My Blog</a>
+        <i
+            class="fa fa-chevron-right fa-2xs"
+            style="font-size: 10px; margin-top: 10px"
+        ></i>
+        <a>Edit Blog</a>
       </div>
-    </form>
+      <div class="updateBlog_layout">
+        <form
+          method="post"
+          action="/blog/<%= diaryContent[0].id %>/update?_method=PUT"
+          enctype="multipart/form-data"
+          class="update_blog_form"
+          onsubmit="return validateFields()"
+        >
+          <label
+            style="
+              display: none;
+            "
+            for="diary_title"
+            ></label
+          >
+          <input type="text" id="diary_title" name="title" value="<%= diaryContent[0].title %>" required></input
+          >
+          <label
+            style="
+              display: none;
+            "
+            for="diary_content"
+            ></label
+          >
+          <textarea type="text" id="diary_content" name="content" rows="15" required><%= diaryContent[0].content_desc %> </textarea>
+          <label
+              for="diary_image"
+              class="attach_img"
+              id="attached_img">
+              <img style="height: 18px;" src="/images/attach_img.png">
+              Add an image</label>
+            <input name="image" id="diary_image" type="file" accept="image/jpeg, image/png, image/jpg" onchange="updateImageField()"></input>
+            <div class="submit_btn">
+          <button type="submit" onclick="currentDiaryValues()" id="updateBtn" class="update_btn">
+            Update
+          </button>
+          </div>
+        </form>
+      </div>
     </div>
   </body>
   <script type="text/javascript">
     //used to get the current values of what user updates
     var title = document.getElementById("diary_title");
     var contents = document.getElementById("diary_title");
-
+    //get attached image path
+    getAttachedImage = document.getElementById('diary_image')
+    //used to change the label to current updaed attached image
+    updateAttachedImage = document.getElementById('attached_img')
     //empty string which will contain updated information to pass into the title and contents field
     var currentTitle = "";
     var currentContents = "";
+    //empty string to contain current attached image path
+    currentAttachedImage = ''
 
     // function for when user clicks on the button to trigger a onclick event,
     // where fields get updated to the current data
@@ -87,5 +91,21 @@
       currentContents = contents.value;
       contents.innerHTML = currentContents;
     }
+
+    function updateImageField() {
+        currentAttachedImage = getAttachedImage.value
+        currentAttachedImage = currentAttachedImage.replace(/^.*\\/, "");
+        updateAttachedImage.innerHTML = currentAttachedImage;
+    }
+
+    function validateFields(){
+    currentAttachedImage = getAttachedImage.value
+    if(!currentAttachedImage){
+        alert("Please attach an image")
+        return false;
+    } else{
+        return true
+    }
+  }
   </script>
 </html>

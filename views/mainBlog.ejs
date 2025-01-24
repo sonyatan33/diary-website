@@ -28,11 +28,16 @@
         <a
           href="/blog/<%= diaryContent.id %>"
           style="text-decoration: none; color: black"
-          ><b style="font-size: 20px; font-family: 'Inter'; color: white"
+          ><b
+            style="font-size: 20px; font-family: 'Inter'; color: white"
+            class="text_ellipsis"
             ><%= diaryContent.title %></b
           >
         </a>
-        <p style="font-family: 'Inter'; color: rgb(223 161 161)">
+        <p
+          style="font-family: 'Inter'; color: white; font-weight: 300"
+          class="text_ellipsis"
+        >
           <%= diaryContent.content_desc %>
         </p>
       </div>
