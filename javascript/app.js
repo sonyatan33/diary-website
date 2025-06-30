@@ -104,6 +104,6 @@ app.use((err, req, res, next) => {
 });
 
 //passing port 5500 to server to enable us to use localhost
-app.listen(5500, () => {
-  console.log("Server is running on port 5500");
+app.listen(5501, () => {
+  console.log("Server is running on port 5501");
 });
